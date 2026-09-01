@@ -11,7 +11,7 @@ func main() {
 	fmt.Print("Type you username: ")
 	fmt.Scan(&username)
 
-	fmt.Println("Your username is now: ", username)
+	fmt.Println("Your username is now:", username)
 	var sum int
 	fmt.Println("The sum is", sum) // Initialize sum as 0.
 
