@@ -62,4 +62,16 @@ func main() {
 		accessDenied()
 	}
 
+	if role == Admin || role == Manager {
+		accessGranted()
+	} else if role == Contractor && (today == Saturday || today == Sunday) {
+		accessGranted()
+	} else if role == Member && !(today == Saturday || today == Sunday) {
+		accessGranted()
+	} else if role == Guest && (today == Monday || today == Wednesday || today == Friday) {
+		accessGranted()
+	} else {
+		accessDenied()
+	}
+
 }
