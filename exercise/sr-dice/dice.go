@@ -7,7 +7,7 @@ package main
 
 import (
 	"fmt"
-	random "math/rand/v2"
+	"math/rand/v2"
 )
 
 func getDiceDeets() map[string]int {
@@ -17,59 +17,91 @@ func getDiceDeets() map[string]int {
 		"diceNumber": 0,
 	}
 	var input int
-	fmt.Println("How many dices are we using?")
-	fmt.Scan(&input)
-	diceMap["diceNumber"] = input
-	fmt.Println("How many times are you going to roll your dice(s)?")
-	fmt.Scan(&input)
-	diceMap["diceRolls"] = input
-	fmt.Println("How many sides do/does the dice(s) has/have?")
-	fmt.Scan(&input)
-	diceMap["diceSides"] = input
+
+	// Validate number of dices is greater or equals to 1
+	for {
+		fmt.Println("How many dices are we using?")
+		fmt.Scan(&input)
+		if input >= 1 {
+			diceMap["diceNumber"] = input
+			break
+		}
+
+	}
+
+	// Validate times being rolled is greater or equals to 1.
+	for {
+		fmt.Println("How many times are you going to roll your dice(s)?")
+		fmt.Scan(&input)
+		if input >= 1 {
+			diceMap["diceRolls"] = input
+			break
+		}
+
+	}
+
+	// Validate number of sides being rolled is greater or equals to 2.
+	for {
+		fmt.Println("How many sides do/does the dice(s) has/have?")
+		fmt.Scan(&input)
+		if input >= 2 {
+			diceMap["diceSides"] = input
+			break
+		}
+	}
 	return diceMap
 }
 
+// Rolls dice(s) based on the number of sides
 func rollTheDice(diceMap map[string]int) int {
-	
+
 	if diceMap["diceNumber"] == 1 {
-		return random.IntN(diceMap["diceSides"] + 1)
+		return rand.IntN(diceMap["diceSides"]) + 1
 	} else {
 		var total int
 		for dice := 1; dice <= diceMap["diceNumber"]; dice++ {
 
-			temp := random.IntN(diceMap["diceSides"] + 1)
-		fmt.Printf("Dice# %d is \n")
-		total += temp
+			temp := rand.IntN(diceMap["diceSides"]) + 1
+			fmt.Printf("Dice# %d rolled a %d\n", dice, temp)
+			total += temp
 		}
+		return total
 	}
-	return total
 }
 
-func main() {
-	//--Requirements:
-	//* Print the sum of the dice roll
+// Iterate through the rounds of dice rolls, and print the total per round
+func diceRollRound(diceMap map[string]int) {
+	fmt.Println("#####################################################")
+	for roll := 1; roll <= diceMap["diceRolls"]; roll++ {
+		fmt.Println("Roll round#", roll)
+		fmt.Println("Rolling...")
+
+		// Get the roll based on the number of dice
+		total := rollTheDice(diceMap)
+		checkRoll(total, diceMap["diceNumber"])
+		fmt.Println("#####################################################")
+	}
+}
+
+func checkRoll(total int, diceTotal int) {
 	//* Print additional information in these cirsumstances:
 	//  - "Snake eyes": when the total roll is 2, and total dice is 2
 	//  - "Lucky 7": when the total roll is 7
 	//  - "Even": when the total roll is even
 	//  - "Odd": when the total roll is odd
-	//* The program must handle any number of dice, rolls, and sides
-	//
-	//--Notes:
-	//* Use packages from the standard library to complete the project
-	diceMap := getDiceDeets()
-	for roll := 0; roll < diceMap["diceRolls"]; roll++ {
-		fmt.Println("Roll #", roll)
-		fmt.Println("Rolling...")
-
-		total (LINK THE FUNCTION. CURRENTLY HERE. ALSO, TRY TO UNDERSTAND THE ROLL TOTAL.)
-
-		if TOTAL == 2 && diceMap["diceNumber"] == 2 {
-			fmt.Println("Snake eyes")
-		} else if {
-			
-		}
+	fmt.Printf("Your roll total is %d with %d sides each\n", total, diceTotal)
+	if total == 2 && diceTotal == 2 {
+		fmt.Println("###SNAKE EYES###")
+	} else if total == 7 {
+		fmt.Println("###LUCKY 7###")
+	} else if total%2 == 0 {
+		fmt.Println("***Even***")
+	} else {
+		fmt.Println("***Odd***")
 	}
+}
 
-	fmt.Println(diceMap)
+func main() {
+	diceMap := getDiceDeets()
+	diceRollRound(diceMap)
 }
