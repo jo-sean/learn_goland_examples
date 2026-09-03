@@ -1,5 +1,10 @@
 //--Summary:
 //  Create a program to manage lending of library books.
+//--Requirements:
+//* The library must have books and members, and must include:
+//  - Which books have been checked out
+//  - What time the books were checked out
+//  - What time the books were returned
 
 package main
 
@@ -7,12 +12,6 @@ import (
 	"fmt"
 	"time"
 )
-
-//--Requirements:
-//* The library must have books and members, and must include:
-//  - Which books have been checked out
-//  - What time the books were checked out
-//  - What time the books were returned
 
 type Library struct {
 	// Map with key of "book" and value of another Map with string "date" with a simple array of two
@@ -88,7 +87,7 @@ func (l *Library) checkInBook(book *Book, member *Member) {
 	} else {
 		// update book
 		lastIndex := len(l.books[book]) - 1
-		l.books[book][lastIndex].checkIn = time.Now().Format("2006-01-02 15:04:05")
+		l.books[book][lastIndex].checkIn = time.Now().Format("2006-01-02 15:04:05.999999999")
 
 		//update member
 		l.removeBooksMember(book, member)
@@ -101,7 +100,7 @@ func (l *Library) checkOutBook(book *Book, member *Member) {
 		fmt.Println("Sorry, the book is currently checked out")
 	} else {
 		// update book
-		newCheckOut := Status{memberPointer: member, checkIn: time.Now().Format("2006-01-02 15:04:05")}
+		newCheckOut := Status{memberPointer: member, checkIn: time.Now().Format("2006-01-02 15:04:05.999999999")}
 		l.books[book] = append(l.books[book], &newCheckOut)
 
 		//update member
@@ -117,12 +116,7 @@ func (l *Library) checkOutBook(book *Book, member *Member) {
 //   - Check out a book
 //   - Check in a book
 //   - Print out initial library information, and after each change
-//
-// * There must only ever be one copy of the library in memory at any time
-//
-// --Notes:
-// * Use the `time` package from the standard library for check in/out times
-// * Liberal use of type aliases, structs, and maps will help organize this project
+
 func main() {
 
 	centralLibrary := Library{books: make(map[*Book][]*Status),
