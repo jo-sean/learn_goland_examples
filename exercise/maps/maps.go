@@ -19,8 +19,36 @@ const (
 //   - Number of servers
 //   - Number of servers for each status (Online, Offline, Maintenance, Retired)
 func printServerStatus(serverMap map[string]int) {
-	fmt.Println("You have", len(serverMap), "servers.")
-	//fmt.Println()
+	fmt.Println()
+	fmt.Println("You have", len(serverMap), "server(s).")
+	invertedMap := make(map[string]int)
+
+	for _, status := range serverMap {
+		statusString := statusSwitch(status)
+		invertedMap[statusString] += 1
+	}
+
+	for status, count := range invertedMap {
+		fmt.Println("There is/are currently", count, "server(s) with the status:", status)
+	}
+	fmt.Println()
+}
+
+func statusSwitch(status int) string {
+	var statusString string
+	switch status {
+	case Online:
+		statusString = "Online"
+	case Offline:
+		statusString = "Offline"
+	case Maintenance:
+		statusString = "Maintenance"
+	case Retired:
+		statusString = "Retired"
+	default:
+		statusString = "Unknown"
+	}
+	return statusString
 }
 
 func serverInitialization(serverMap map[string]int, servers []string) {
@@ -31,19 +59,8 @@ func serverInitialization(serverMap map[string]int, servers []string) {
 			serverMap[server] = Online
 
 		} else {
-			var statusString string
-			switch status {
-			case Online:
-				statusString = "Online"
-			case Offline:
-				statusString = "Offline"
-			case Maintenance:
-				statusString = "Maintenance"
-			case Retired:
-				statusString = "Retired"
-			default:
-				statusString = "Unknown"
-			}
+			statusString := statusSwitch(status)
+
 			fmt.Println("You already have the server named", server, "and its status is currently", statusString)
 		}
 	}
@@ -61,9 +78,18 @@ func serverInitialization(serverMap map[string]int, servers []string) {
 //   - display server info
 func main() {
 	servers := []string{"darkstar", "aiur", "omicron", "w359", "baseline"}
-
 	serverMap := make(map[string]int)
 
 	serverInitialization(serverMap, servers)
+	printServerStatus(serverMap)
+
+	serverMap["darkstar"] = Retired
+	serverMap["aiur"] = Offline
+	printServerStatus(serverMap)
+
+	for server := range serverMap {
+		serverMap[server] = Maintenance
+	}
+	printServerStatus(serverMap)
 
 }
