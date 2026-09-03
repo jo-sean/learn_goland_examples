@@ -27,9 +27,15 @@ func printAssemblyLine(assemblyLine *[]Part) {
 func main() {
 	var assemblyLine []Part
 
-	assemblyLine[0] = "First"
-	assemblyLine[1] = "Second"
-	assemblyLine[2] = "Third"
+	var first Part = "First"
+	var second Part = "Second"
+	var third Part = "Third"
+	// var fourth Part = "Fourth"
+	// var fifth Part = "Fifth"
+
+	assemblyLine[0] = first
+	assemblyLine[1] = second
+	assemblyLine[2] = third
 
 	printAssemblyLine(&assemblyLine)
 
