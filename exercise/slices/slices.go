@@ -9,8 +9,8 @@ import "fmt"
 type Part string
 
 // * Create a function to print out the contents of the assembly line
-func printAssemblyLine(assemblyLine *[]Part) {
-	for i, value := range *assemblyLine {
+func printAssemblyLine(assemblyLine []Part) {
+	for i, value := range assemblyLine {
 		fmt.Println("Item", i, "on the assembly is: ", value)
 	}
 }
@@ -29,15 +29,15 @@ func main() {
 	assemblyLine[1] = "Bolts"
 	assemblyLine[2] = "Rivets"
 
-	printAssemblyLine(&assemblyLine)
+	printAssemblyLine(assemblyLine)
 
 	fmt.Println()
 
 	assemblyLine = append(assemblyLine, "Washers", "Screws")
-	printAssemblyLine(&assemblyLine)
+	printAssemblyLine(assemblyLine)
 
 	fmt.Println()
 	newItemsOnly := assemblyLine[3:]
-	printAssemblyLine(&newItemsOnly)
+	printAssemblyLine(newItemsOnly)
 
 }

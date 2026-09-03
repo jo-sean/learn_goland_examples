@@ -4,9 +4,9 @@
 
 package main
 
-import {
+import (
 	"fmt"
-}
+)
 
 const (
 	Online      = 0
@@ -18,22 +18,34 @@ const (
 // * Create a function to print server status, including:
 //   - Number of servers
 //   - Number of servers for each status (Online, Offline, Maintenance, Retired)
-func printServerStatus(serverMap *map[string]int) {
-	fmt.Println("You have", len(*serverMap), "servers.")
+func printServerStatus(serverMap map[string]int) {
+	fmt.Println("You have", len(serverMap), "servers.")
 	//fmt.Println()
 }
 
-func serverInitialization(serverMap *map[string]int, servers *[]string) {
-	for _, server := range *servers {
+func serverInitialization(serverMap map[string]int, servers []string) {
+	for _, server := range servers {
 		status, found := serverMap[server]
-	if !found {
-		fmt.Println("Adding", server, "and turning it oneline.")
-		serverMap[server] = Online
+		if !found {
+			fmt.Println("Adding", server, "and turning it Oneline.")
+			serverMap[server] = Online
 
-	} else {
-		fmt.Println("You already have the server named", server, "and its status is currently", status)
-	}
-
+		} else {
+			var statusString string
+			switch status {
+			case Online:
+				statusString = "Online"
+			case Offline:
+				statusString = "Offline"
+			case Maintenance:
+				statusString = "Maintenance"
+			case Retired:
+				statusString = "Retired"
+			default:
+				statusString = "Unknown"
+			}
+			fmt.Println("You already have the server named", server, "and its status is currently", statusString)
+		}
 	}
 }
 
@@ -52,6 +64,6 @@ func main() {
 
 	serverMap := make(map[string]int)
 
-	serverInitialization(&serverMap, &servers)
+	serverInitialization(serverMap, servers)
 
 }
