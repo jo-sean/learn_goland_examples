@@ -18,5 +18,19 @@ import "fmt"
 
 type Part string
 
+func printAssemblyLine(assemblyLine *[]Part) {
+	for i, value := range *assemblyLine {
+		fmt.Println(i, "- Item on the assembly is: ", value)
+	}
+}
+
 func main() {
+	var assemblyLine []Part
+
+	assemblyLine[0] = "First"
+	assemblyLine[1] = "Second"
+	assemblyLine[2] = "Third"
+
+	printAssemblyLine(&assemblyLine)
+
 }
