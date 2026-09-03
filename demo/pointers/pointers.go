@@ -38,8 +38,8 @@ func main() {
 	fmt.Println(altCounter)
 
 	phrase := []string{hello, world}
-	fmt.Println(phrase)
+	fmt.Println(phrase, counter)
 	replace(&phrase[1], "Go!", &counter)
-	fmt.Println(phrase)
+	fmt.Println(phrase, counter)
 
 }
