@@ -84,7 +84,7 @@ func (l *Library) removeMember(member *Member) {
 
 func (l *Library) checkInBook(book *Book, member *Member) {
 	if !book.checkedOut {
-		fmt.Println("The book is available. Feel free to checkout the book. ")
+		fmt.Println("Book is not checked out. Feel free to checkout the book.")
 	} else {
 		// update book
 		lastIndex := len(l.books[book]) - 1
@@ -107,6 +107,8 @@ func (l *Library) checkOutBook(book *Book, member *Member) {
 		//update member
 		l.addBooksMember(book, member)
 		book.checkedOut = true
+
+		fmt.Println("Hello", member.name, ". You've checked out the following book: ", l.members[member][len(l.members[member])-1].title)
 	}
 }
 
@@ -159,4 +161,7 @@ func main() {
 	centralLibrary.addMember(&chloe)
 
 	fmt.Println(centralLibrary)
+
+	centralLibrary.checkInBook(&hobbit, &jennifer)
+	centralLibrary.checkOutBook(&hobbit, &jennifer)
 }
