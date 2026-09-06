@@ -8,5 +8,5 @@ import (
 func main() {
 	msg.Hi()
 	display.Display("Hello from display")
-	msg.Exciting("an exciting message")
+	msg.Exciting("An exciting message")
 }
