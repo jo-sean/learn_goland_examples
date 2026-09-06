@@ -1,5 +1,9 @@
 package msg
 
-func Hi() {
+import (
+	dp "coursecontent/demo/pkg/display"
+)
 
+func Hi() {
+	dp.Display("Hi")
 }

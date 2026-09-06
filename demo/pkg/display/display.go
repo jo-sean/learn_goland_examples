@@ -5,9 +5,5 @@ import (
 )
 
 func Display(msg string) {
-	fmt.Println(msg)
-}
-
-func hello(msg string) {
-	fmt.Println(msg)
+	fmt.Printf("%v\n", msg)
 }
