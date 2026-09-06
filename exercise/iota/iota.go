@@ -16,6 +16,26 @@ package main
 
 import "fmt"
 
+//--Requirements:
+//* Mathematical operations must be defined as constants using iota
+//* Write a receiver function that performs the mathematical operation
+//  on two operands
+//* Operations required:
+//  - Add, Subtract, Multiply, Divide
+
+const (
+	add Operation = iota
+	sub
+	mul
+	div
+)
+
+type Operation byte
+
+func (o Operation) calculate(a float32, b float32) float32 {
+	return []float32{a + b, a - b, a * b, a / b}[o]
+}
+
 func main() {
 	fmt.Println(add.calculate(2, 2)) // = 4
 
