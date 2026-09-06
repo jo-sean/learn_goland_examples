@@ -32,8 +32,20 @@ const (
 
 type Operation byte
 
-func (o Operation) calculate(a float32, b float32) float32 {
-	return []float32{a + b, a - b, a * b, a / b}[o]
+func (o Operation) calculate(a, b float32) float32 {
+	switch o {
+	case add:
+		return a + b
+	case sub:
+		return a - b
+	case mul:
+		return a * b
+	case div:
+		return a / b
+	default:
+		panic("Unknown operation")
+	}
+
 }
 
 func main() {
