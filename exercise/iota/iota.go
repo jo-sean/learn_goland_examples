@@ -45,7 +45,14 @@ func (o Operation) calculate(a, b float32) float32 {
 	default:
 		panic("Unknown operation")
 	}
+}
 
+func (o Operation) calculateSimple(a, b float32) float32 {
+	if o <= div || o >= add {
+		return []float32{a + b, a - b, a * b, a / b}[o]
+	} else {
+		panic("Unknown operation")
+	}
 }
 
 func main() {
@@ -56,4 +63,7 @@ func main() {
 	fmt.Println(mul.calculate(3, 3)) // = 9
 
 	fmt.Println(div.calculate(100, 2)) // = 50
+
+	fmt.Println(mul.calculateSimple(3, 3)) // = 9
+
 }
