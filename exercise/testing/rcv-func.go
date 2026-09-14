@@ -112,10 +112,10 @@ func main() {
 	rae.CurrentEP()
 	fmt.Println(*rae, *jack)
 
-	jack.levelUp()
-	rae.levelUp()
+	jack.LevelUp()
+	rae.LevelUp()
 	fmt.Println(*rae, *jack)
-	rae.levelUp()
+	rae.LevelUp()
 	fmt.Println(*rae, *jack)
 
 }
