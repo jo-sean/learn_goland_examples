@@ -10,3 +10,14 @@
 //
 //--Notes:
 //* Use `go test -v ./exercise/testing` to run these specific tests
+
+package testing
+
+import (
+	"testing"
+)
+
+func maximumLimitHealthEnergyCheck(t testing.T) {
+	NewPlayer("Robert")
+
+}
