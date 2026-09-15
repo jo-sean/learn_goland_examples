@@ -11,7 +11,7 @@
 //--Notes:
 //* Use `go test -v ./exercise/testing` to run these specific tests
 
-package testing
+package main
 
 import (
 	"testing"
@@ -22,13 +22,13 @@ func TestMaximumLimitHealthEnergyCheck(t *testing.T) {
 
 	bob.Heal(Potion * 2)
 	if bob.health > bob.maxHealth {
-		t.Errorf("%s has %d health. However, Max Health is %d", bob.name, bob.health, bob.maxHealth)
+		t.Fatalf("%s has %d health. However, Max Health is %d", bob.name, bob.health, bob.maxHealth)
 
 	}
 
 	bob.RestoreMagic(Ether * 2)
 	if bob.energy > bob.maxEnergy {
-		t.Errorf("%s has %d energy. However, Max Energy is %d", bob.name, bob.energy, bob.maxEnergy)
+		t.Fatalf("%s has %d energy. However, Max Energy is %d", bob.name, bob.energy, bob.maxEnergy)
 	}
 
 }
@@ -38,13 +38,20 @@ func TestMinimumLimitHealthEnergyCheck(t *testing.T) {
 
 	bob.Damage(Potion * 2)
 	if bob.health < 0 {
-		t.Errorf("%s has %d health. That is less than zero", bob.name, bob.health)
+		t.Fatalf("%s has %d health. That is less than zero", bob.name, bob.health)
+
+	}
+	if bob.health > bob.maxHealth {
+		t.Fatalf("%s has %d health. However, Max Health is %d", bob.name, bob.health, bob.maxHealth)
 
 	}
 
 	bob.UseMagic(Ether * 2)
 	if bob.energy < 0 {
-		t.Errorf("%s has %d energy. That is less than zero", bob.name, bob.energy)
+		t.Fatalf("%s has %d energy. That is less than zero", bob.name, bob.energy)
+	}
+	if bob.energy > bob.maxEnergy {
+		t.Fatalf("%s has %d energy. However, Max Energy is %d", bob.name, bob.energy, bob.maxEnergy)
 	}
 
 }
