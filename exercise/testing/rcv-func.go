@@ -24,9 +24,9 @@ type Player struct {
 }
 
 func NewPlayer(playerName string) *Player {
-	var startHealth HealthPoints = startValue + levelUpBonus
+	var startHealth HealthPoints = StartValue + LevelUpBonus
 	return &Player{
-		health: startHealth, maxHealth: startHealth, energy: startValue, maxEnergy: startValue, name: playerName, level: firstLevel,
+		health: startHealth, maxHealth: startHealth, energy: StartValue, maxEnergy: StartValue, name: playerName, level: FirstLevel,
 	}
 }
 
