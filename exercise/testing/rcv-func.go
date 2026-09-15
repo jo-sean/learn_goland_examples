@@ -1,5 +1,4 @@
 package testing
-package main
 
 import (
 	"fmt"
@@ -10,11 +9,11 @@ type EnergyPoints uint
 type Level uint
 
 const (
-	levelUpBonus              = 2
-	startValue                = 8
-	firstLevel   Level        = 1
-	potion       HealthPoints = 10
-	ether        EnergyPoints = 10
+	LevelUpBonus              = 2
+	StartValue                = 8
+	FirstLevel   Level        = 1
+	Potion       HealthPoints = 10
+	Ether        EnergyPoints = 10
 )
 
 type Player struct {
@@ -69,9 +68,9 @@ func (p *Player) RestoreMagic(ether EnergyPoints) {
 
 func (p *Player) LevelUp() {
 	p.level += 1
-	p.maxHealth += HealthPoints((levelUpBonus * 2) * p.level)
+	p.maxHealth += HealthPoints((LevelUpBonus * 2) * p.level)
 	p.health = p.maxHealth
-	p.maxEnergy += EnergyPoints(levelUpBonus * p.level)
+	p.maxEnergy += EnergyPoints(LevelUpBonus * p.level)
 	p.energy = p.maxEnergy
 }
 
@@ -100,12 +99,12 @@ func main() {
 	rae.CurrentEP()
 	fmt.Println(*rae, *jack)
 
-	jack.Heal(potion)
+	jack.Heal(Potion)
 	jack.CurrentHP()
-	jack.Heal(potion)
+	jack.Heal(Potion)
 	rae.UseMagic(5)
 	rae.UseMagic(5)
-	rae.RestoreMagic(ether)
+	rae.RestoreMagic(Ether)
 	jack.CurrentHP()
 	jack.CurrentEP()
 	rae.CurrentHP()
