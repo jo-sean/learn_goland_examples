@@ -49,7 +49,12 @@ func (v *Vehicles) Lift() {
 	default:
 		fmt.Println("Vehicle type not supported")
 	}
+}
 
+func serviceVehicles(shop *[]Servicer) {
+	for _, vehicle := range *shop {
+		vehicle.Lift()
+	}
 }
 
 type Servicer interface {
@@ -62,10 +67,6 @@ func main() {
 	truck := Vehicles{large, "Ford F-150"}
 
 	shop := []Servicer{&moto, &car, &truck}
-
-	// 5. Loop through and execute the interface method
-	for _, vehicle := range shop {
-		vehicle.Lift()
-	}
+	serviceVehicles(&shop)
 
 }
