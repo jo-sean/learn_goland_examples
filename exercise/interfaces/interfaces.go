@@ -41,11 +41,11 @@ type Vehicles struct {
 func (v *Vehicles) Lift() {
 	switch v.carType {
 	case small:
-		fmt.Printf("%s is a %s. The vehicle was moved to the small lift\n", v.name, v.carType)
+		fmt.Printf("%s is a %s. The vehicle was moved to the small lift.\n", v.name, v.carType)
 	case medium:
-		fmt.Printf("%s is a %s. The vehicle was moved to the medium lift\n", v.name, v.carType)
+		fmt.Printf("%s is a %s. The vehicle was moved to the medium lift.\n", v.name, v.carType)
 	case large:
-		fmt.Printf("%s is a %s. The vehicle was moved to the large lift\n", v.name, v.carType)
+		fmt.Printf("%s is a %s. The vehicle was moved to the large lift.\n", v.name, v.carType)
 	default:
 		fmt.Println("Vehicle type not supported")
 	}
