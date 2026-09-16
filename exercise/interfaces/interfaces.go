@@ -2,6 +2,12 @@
 //  Create a program that directs vehicles at a mechanic shop
 //  to the correct vehicle lift, based on vehicle size.
 //
+
+//--Notes:
+//* Use any names for vehicle models
+
+package main
+
 //--Requirements:
 //* The shop has lifts for multiple vehicle sizes/types:
 //  - Motorcycles: small lifts
@@ -14,12 +20,17 @@
 //* Direct at least 1 of each vehicle type to the correct
 //  lift, and print out the vehicle information.
 //
-//--Notes:
-//* Use any names for vehicle models
 
-package main
+type Vehicle string
 
-import "fmt"
+type Motorcycles Vehicle
+type Cars Vehicle
+type Trucks Vehicle
+
+type Vehicles struct {
+	carType Vehicle
+	name    string
+}
 
 func main() {
 
